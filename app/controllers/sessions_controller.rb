@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
   def create
-    ap params
-    Rails.logger.info params
-    user = User.from_omniauth(params["omniauth.auth"])
+    ap env["omniauth.auth"]
+    user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
     redirect_to root_url
   end
